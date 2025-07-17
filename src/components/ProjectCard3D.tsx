@@ -1,10 +1,22 @@
 import React from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 
+interface Projeto {
+  titulo: string;
+  descricao: string;
+  tecnologias: string[];
+  cor: string;
+  status: string;
+  icone: React.ReactNode;
+  funcionalidades: string[];
+  demoUrl: string;
+  githubUrl: string;
+}
+
 /**
  * Card de projeto com efeito 3D/flip ao hover, visual tech/minimalista.
  */
-export default function ProjectCard3D({ projeto }: { projeto: any }) {
+export default function ProjectCard3D({ projeto }: { projeto: Projeto }) {
   return (
     <div className="group perspective h-80 w-full flex flex-col cursor-pointer">
       <div className="relative w-full h-full flex-1 transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
