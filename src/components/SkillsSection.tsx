@@ -2,7 +2,7 @@ import React from 'react';
 import { Zap, Code, Server, MonitorSmartphone, Paintbrush, Database, Figma as FigmaIcon, GitBranch, ClipboardList, NotebookPen, KanbanSquare, Users, Layers, LayoutDashboard } from 'lucide-react';
 import { Habilidade } from '../data/skills';
 
-const iconMap = {
+const iconMap: Record<string, React.ReactNode> = {
   zap: <Zap size={24} className="text-cyan-400" />,
   code: <Code size={24} className="text-yellow-400" />,
   server: <Server size={24} className="text-green-400" />,
