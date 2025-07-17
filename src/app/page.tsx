@@ -1,13 +1,17 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Code, Terminal, Zap, Star, Heart, Sparkles, Github, Mail, Linkedin, ExternalLink, Download, Menu, X, Play, Pause, Volume2, VolumeX, Paintbrush, Server, Database, Figma as FigmaIcon, GitBranch, ClipboardList, NotebookPen, KanbanSquare, MonitorSmartphone, Users, LayoutDashboard, Layers, Settings, Globe, ChevronRight } from 'lucide-react';
 import SidebarMenu from '../components/SidebarMenu';
 import HeaderHero from '../components/HeaderHero';
 import ProjectCard3D from '../components/ProjectCard3D';
 import DashboardWidget from '../components/DashboardWidget';
 import Timeline from '../components/Timeline';
 import SkillsSection from '../components/SkillsSection';
-import { ReactNode } from 'react';
+import { habilidades, Habilidade } from '../data/skills';
+import { projetos } from '../data/projects';
+import { conquistas } from '../data/achievements';
+import { linksSociais } from '../data/socialLinks';
+import { Projeto } from '../data/types';
+import { ExternalLink, Github, Zap, Server, Paintbrush, GitBranch, Users, MonitorSmartphone, Code, Database, Figma as FigmaIcon, ClipboardList, NotebookPen, KanbanSquare, Terminal, Download, Star, Heart, Mail, Linkedin } from 'lucide-react';
 
 // Definição dos tipos para partículas, habilidades, projetos, conquistas e links sociais
 
@@ -21,25 +25,6 @@ type Particula = {
   type: string;
   rotation: number;
   color: 'purple' | 'pink' | 'cyan' | 'yellow';
-};
-
-type Habilidade = {
-  nome: string;
-  nivel: number;
-  cor: string;
-  icone: ReactNode;
-};
-
-type Projeto = {
-  titulo: string;
-  descricao: string;
-  tecnologias: string[];
-  cor: string;
-  status: string;
-  icone: ReactNode; // Corrigido para ReactNode
-  funcionalidades: string[];
-  demoUrl: string;
-  githubUrl: string;
 };
 
 type Conquista = {
@@ -161,75 +146,13 @@ const Portfolio = () => {
   }, [mounted]);
 
   // Habilidades principais
-  const habilidades: Habilidade[] = [
-    { nome: 'React', nivel: 90, cor: 'from-blue-500 to-cyan-500', icone: <Zap size={24} className="text-cyan-400" /> },
-    { nome: 'JavaScript', nivel: 90, cor: 'from-yellow-400 to-yellow-600', icone: <Code size={24} className="text-yellow-400" /> },
-    { nome: 'Node.js', nivel: 85, cor: 'from-green-500 to-emerald-500', icone: <Server size={24} className="text-green-400" /> },
-    { nome: 'React Native', nivel: 85, cor: 'from-purple-500 to-pink-500', icone: <MonitorSmartphone size={24} className="text-purple-400" /> },
-    { nome: 'Tailwind CSS', nivel: 80, cor: 'from-cyan-500 to-blue-500', icone: <Paintbrush size={24} className="text-cyan-300" /> },
-    { nome: 'Vite', nivel: 80, cor: 'from-purple-500 to-pink-500', icone: <Zap size={24} className="text-purple-400" /> },
-    { nome: 'MongoDB', nivel: 80, cor: 'from-green-700 to-green-900', icone: <Database size={24} className="text-green-700" /> },
-    { nome: 'UX/UI Design', nivel: 80, cor: 'from-pink-500 to-purple-500', icone: <Paintbrush size={24} className="text-pink-400" /> },
-    { nome: 'Figma', nivel: 80, cor: 'from-orange-400 to-pink-400', icone: <FigmaIcon size={24} className="text-pink-400" /> },
-    { nome: 'Express', nivel: 80, cor: 'from-gray-700 to-gray-900', icone: <Server size={24} className="text-gray-400" /> },
-    { nome: 'Git', nivel: 75, cor: 'from-red-500 to-orange-500', icone: <GitBranch size={24} className="text-orange-400" /> },
-    { nome: 'Trello', nivel: 75, cor: 'from-blue-400 to-blue-700', icone: <ClipboardList size={24} className="text-blue-400" /> },
-    { nome: 'Next.js', nivel: 75, cor: 'from-gray-900 to-gray-700', icone: <Code size={24} className="text-gray-300" /> },
-    { nome: 'Notion', nivel: 70, cor: 'from-gray-400 to-gray-700', icone: <NotebookPen size={24} className="text-gray-400" /> },
-    { nome: 'Scrum', nivel: 65, cor: 'from-purple-400 to-purple-700', icone: <Users size={24} className="text-purple-400" /> },
-    { nome: 'Kanban', nivel: 65, cor: 'from-green-400 to-green-700', icone: <KanbanSquare size={24} className="text-green-400" /> },
-  ];
-
-  // Projetos de exemplo (visual tech, sem emoji)
-  const projetos: Projeto[] = [
-    {
-      titulo: 'BrainLinker - App para Alzheimer',
-      descricao: 'Aplicativo para auxiliar pessoas com Alzheimer. Familiares enviam fotos e vídeos para cuidadores, que mostram após uma perda de memória para acalmar e relembrar quem são as pessoas do ambiente.',
-      tecnologias: ['React Native', 'Node.js', 'Expo'],
-      cor: 'from-pink-600 to-purple-600',
-      status: 'Concluído',
-      icone: <Zap size={32} />, // Ícone tech
-      funcionalidades: [
-        'Envio de fotos e vídeos',
-        'Acesso por cuidadores',
-        'Ajuda no reconhecimento de pessoas',
-        'Interface mobile intuitiva'
-      ],
-      demoUrl: '',
-      githubUrl: 'https://github.com/Zecreitas/BrainLinker',
-    },
-    {
-      titulo: 'Zecfly - Buscador de Viagens',
-      descricao: 'Site buscador de viagens estilo Kayak, onde pesquisando você encontra os melhores preços de passagens aéreas e hotéis.',
-      tecnologias: ['React', 'Vite', 'Tailwind CSS'],
-      cor: 'from-purple-600 to-blue-600',
-      status: 'Em Desenvolvimento',
-      icone: <Code size={32} />, // Ícone tech
-      funcionalidades: [
-        'Busca de passagens aéreas',
-        'Busca de hotéis',
-        'Filtros de preço e destino',
-        'Interface responsiva'
-      ],
-      demoUrl: '',
-      githubUrl: 'https://github.com/Zecreitas/Zecfly',
-    },
-  ];
-
+  // const habilidades: Habilidade[] = [...];
+  // Projetos de exemplo
+  // const projetos: Projeto[] = [...];
   // Conquistas
-  const conquistas: Conquista[] = [
-    { titulo: 'Estágio na Prefeitura de Sapiranga', data: '2023', icone: '🏢' },
-    { titulo: 'Formação Técnica em Informática (CIMOL)', data: '2024', icone: '🎓' },
-    { titulo: 'Projetos Web e Mobile', data: '2021-2024', icone: '💻' },
-    { titulo: 'Suporte Técnico e Infraestrutura', data: '2023', icone: '🛠️' },
-  ];
-
+  // const conquistas: Conquista[] = [...];
   // Links sociais
-  const linksSociais: LinkSocial[] = [
-    { icone: Github, label: 'GitHub', url: 'https://github.com/Zecreitas', cor: 'hover:text-gray-300' },
-    { icone: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/guilhermeschuh/', cor: 'hover:text-blue-400' },
-    { icone: Mail, label: 'Email', url: 'mailto:schuh.gui@gmail.com', cor: 'hover:text-red-400' },
-  ];
+  // const linksSociais: LinkSocial[] = [...];
 
   // Função para simular som ao passar o mouse
   const tocarSomHover = useCallback(() => {
@@ -271,7 +194,7 @@ const Portfolio = () => {
     >
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
-          <span className={`text-2xl transition-transform duration-300 ${hoveredSkill === index ? 'scale-110 rotate-12' : ''}`}>{skill.icone}</span>
+          <span className={`text-2xl transition-transform duration-300 ${hoveredSkill === index ? 'scale-110 rotate-12' : ''}`}>{iconMap[skill.icone] || <Zap size={24} />}</span>
           <span className={`font-medium text-white transition-colors duration-300 ${hoveredSkill === index ? 'text-purple-300' : ''}`}>{skill.nome}</span>
         </div>
         <span className={`text-sm text-gray-300 font-mono transition-all duration-300 ${hoveredSkill === index ? 'text-purple-400 scale-110' : ''}`}>{skill.nivel}%</span>
@@ -407,6 +330,21 @@ const Portfolio = () => {
     { label: 'Expo', icon: <Zap size={14} className="text-cyan-500" /> },
     { label: 'Vite', icon: <Zap size={14} className="text-yellow-500" /> },
   ];
+
+  const iconMap: Record<string, React.ReactNode> = {
+    zap: <Zap size={24} className="text-cyan-400" />,
+    code: <Code size={24} className="text-yellow-400" />,
+    server: <Server size={24} className="text-green-400" />,
+    monitorSmartphone: <MonitorSmartphone size={24} className="text-purple-400" />,
+    paintbrush: <Paintbrush size={24} className="text-cyan-300" />,
+    database: <Database size={24} className="text-green-700" />,
+    figma: <FigmaIcon size={24} className="text-pink-400" />,
+    gitBranch: <GitBranch size={24} className="text-orange-400" />,
+    clipboardList: <ClipboardList size={24} className="text-blue-400" />,
+    notebookPen: <NotebookPen size={24} className="text-gray-400" />,
+    kanbanSquare: <KanbanSquare size={24} className="text-green-400" />,
+    users: <Users size={24} className="text-purple-400" />,
+  };
 
   // Tela de carregamento
   if (carregando) {

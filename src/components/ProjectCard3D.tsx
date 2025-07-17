@@ -1,17 +1,11 @@
 import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Zap, Code } from 'lucide-react';
+import { Projeto } from '../data/types';
 
-interface Projeto {
-  titulo: string;
-  descricao: string;
-  tecnologias: string[];
-  cor: string;
-  status: string;
-  icone: React.ReactNode;
-  funcionalidades: string[];
-  demoUrl: string;
-  githubUrl: string;
-}
+const iconMap: Record<string, React.ReactNode> = {
+  zap: <Zap size={32} />,
+  code: <Code size={32} />,
+};
 
 /**
  * Card de projeto com efeito 3D/flip ao hover, visual tech/minimalista.
@@ -25,7 +19,7 @@ export default function ProjectCard3D({ projeto }: { projeto: Projeto }) {
           {/* Miniatura do projeto ou ícone tech */}
           <div className="w-14 h-14 mb-3 flex items-center justify-center bg-gray-800 rounded-xl border border-purple-700/40">
             {/* Se tiver imagem, use <img src={projeto.imagem} ... /> */}
-            <span className="text-2xl text-purple-300">{projeto.icone || <svg width="24" height="24"><circle cx="12" cy="12" r="10" fill="#a78bfa" /></svg>}</span>
+            <span className="text-2xl text-purple-300">{iconMap[projeto.icone] || <Zap size={32} />}</span>
           </div>
           <h3 className="text-xl font-anime-title text-purple-200 mb-2 text-center">{projeto.titulo}</h3>
           <p className="text-gray-300 text-center font-anime-body mb-4">{projeto.descricao}</p>

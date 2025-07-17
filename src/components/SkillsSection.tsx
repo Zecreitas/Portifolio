@@ -1,12 +1,21 @@
 import React from 'react';
-import { Zap, Layers, LayoutDashboard } from 'lucide-react';
+import { Zap, Code, Server, MonitorSmartphone, Paintbrush, Database, Figma as FigmaIcon, GitBranch, ClipboardList, NotebookPen, KanbanSquare, Users, Layers, LayoutDashboard } from 'lucide-react';
+import { Habilidade } from '../data/skills';
 
-interface Habilidade {
-  nome: string;
-  nivel: number;
-  cor: string;
-  icone: React.ReactNode;
-}
+const iconMap = {
+  zap: <Zap size={24} className="text-cyan-400" />,
+  code: <Code size={24} className="text-yellow-400" />,
+  server: <Server size={24} className="text-green-400" />,
+  monitorSmartphone: <MonitorSmartphone size={24} className="text-purple-400" />,
+  paintbrush: <Paintbrush size={24} className="text-cyan-300" />,
+  database: <Database size={24} className="text-green-700" />,
+  figma: <FigmaIcon size={24} className="text-pink-400" />,
+  gitBranch: <GitBranch size={24} className="text-orange-400" />,
+  clipboardList: <ClipboardList size={24} className="text-blue-400" />,
+  notebookPen: <NotebookPen size={24} className="text-gray-400" />,
+  kanbanSquare: <KanbanSquare size={24} className="text-green-400" />,
+  users: <Users size={24} className="text-purple-400" />,
+};
 
 interface SkillsSectionProps {
   habilidades: Habilidade[];
@@ -25,7 +34,7 @@ const SkillBar = ({ skill, index, hoveredSkill, setHoveredSkill }: { skill: Habi
   >
     <div className="flex justify-between items-center mb-2">
       <div className="flex items-center gap-2">
-        <span className={`text-2xl transition-transform duration-300 ${hoveredSkill === index ? 'scale-110 rotate-12' : ''}`}>{skill.icone}</span>
+        <span className={`text-2xl transition-transform duration-300 ${hoveredSkill === index ? 'scale-110 rotate-12' : ''}`}>{iconMap[skill.icone] || <Zap size={24} />}</span>
         <span className={`font-medium text-white transition-colors duration-300 ${hoveredSkill === index ? 'text-purple-300' : ''}`}>{skill.nome}</span>
       </div>
       <span className={`text-sm text-gray-300 font-mono transition-all duration-300 ${hoveredSkill === index ? 'text-purple-400 scale-110' : ''}`}>{skill.nivel}%</span>
